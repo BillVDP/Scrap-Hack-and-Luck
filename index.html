@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrap, Hack, & Luck</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Main Game Canvas -->
+        <canvas id="game-canvas"></canvas>
+
+        <!-- HUD: Top Left - Health and Lives -->
+        <div id="hud-top-left" class="hud-panel glass-panel">
+            <div class="hud-row">
+                <span class="hud-label">LIVES:</span>
+                <span id="lives-display">❤️❤️❤️</span>
+            </div>
+            <div class="hud-row">
+                <span class="hud-label">HP:</span>
+                <div class="progress-bar-container">
+                    <div id="health-bar" class="progress-bar fill-green"></div>
+                </div>
+            </div>
+            <div id="limb-status" class="hud-subtext">Limbs: Optimal</div>
+        </div>
+
+        <!-- HUD: Top Center - Nice Meter -->
+        <div id="hud-top-center" class="hud-panel glass-panel">
+            <div class="hud-row">
+                <span class="hud-label">NICE METER</span>
+            </div>
+            <div class="progress-bar-container">
+                <div id="nice-meter-bar" class="progress-bar fill-blue"></div>
+            </div>
+            <div id="nice-meter-status" class="hud-subtext">Neutral</div>
+        </div>
+
+        <!-- HUD: Top Right - Weight & Coins -->
+        <div id="hud-top-right" class="hud-panel glass-panel">
+            <div class="hud-row">
+                <span class="hud-label">COINS:</span>
+                <span id="coins-display" class="highlight-text">0</span> 🪙
+            </div>
+            <div class="hud-row">
+                <span class="hud-label">WEIGHT:</span>
+                <span id="weight-display">0 / 100</span> kg
+            </div>
+            <div class="progress-bar-container weight-bar-container">
+                <div id="weight-bar" class="progress-bar fill-orange"></div>
+            </div>
+        </div>
+
+        <!-- HUD: Bottom Left - Loadout -->
+        <div id="hud-bottom-left" class="hud-panel glass-panel">
+            <div class="hud-row title">CURRENT LOADOUT</div>
+            <div class="loadout-slot">
+                <span class="slot-label">CHASSIS:</span>
+                <span id="chassis-display" class="slot-value">Standard Frame</span>
+            </div>
+            <div class="loadout-slot">
+                <span class="slot-label">GEAR:</span>
+                <span id="gear-display" class="slot-value">None</span>
+            </div>
+        </div>
+        
+        <!-- Game Over / Checkpoint Overlay -->
+        <div id="overlay-screen" class="screen-overlay hidden">
+            <h1 id="overlay-title">CHECKPOINT</h1>
+            <p id="overlay-message">Workshop Safe Zone</p>
+            <div id="workshop-menu" class="hidden">
+                <h3>Workshop Menu</h3>
+                <div class="loadout-options">
+                    <button class="menu-btn" onclick="Game.equipGear('Heavy Boots', 40)">Equip Heavy Boots (+40kg)</button>
+                    <button class="menu-btn" onclick="Game.equipGear('Hover Treads', 10)">Equip Hover Treads (+10kg)</button>
+                    <button class="menu-btn" onclick="Game.equipGear('None', 0)">Unequip Gear</button>
+                </div>
+                <div class="loadout-options">
+                    <button class="menu-btn" onclick="Game.setChassis('Speed/Bladed')">Agility Chassis</button>
+                    <button class="menu-btn" onclick="Game.setChassis('Hacking/Digital')">Hacking Chassis</button>
+                    <button class="menu-btn" onclick="Game.setChassis('Heavy/Armor')">Armor Chassis</button>
+                </div>
+                <button id="start-btn" class="action-btn" onclick="Game.startRun()">PROCEED TO NEXT ROOM</button>
+            </div>
+        </div>
+
+        <!-- Encounter Overlay -->
+        <div id="encounter-screen" class="screen-overlay hidden">
+            <div class="encounter-modal glass-panel">
+                <h2 id="encounter-entity-name">Guardian Robot</h2>
+                <div class="robot-portrait" id="encounter-portrait">🤖</div>
+                <p id="encounter-dialogue">"Halt. State your purpose or face deactivation."</p>
+                
+                <div class="encounter-choices">
+                    <button class="encounter-btn fight-btn" onclick="Encounter.chooseAction('FIGHT')">
+                        <span class="btn-icon">⚔️</span>
+                        <div class="btn-text">
+                            <strong>FIGHT</strong>
+                            <span>Risk limb damage. Need correct Chassis.</span>
+                        </div>
+                    </button>
+                    
+                    <button class="encounter-btn coax-btn" onclick="Encounter.chooseAction('COAX')">
+                        <span class="btn-icon">💬</span>
+                        <div class="btn-text">
+                            <strong>COAX</strong>
+                            <span>Buy info (5 coins) or Lie.</span>
+                        </div>
+                    </button>
+                    
+                    <button class="encounter-btn roll-btn" onclick="Encounter.chooseAction('ROLL')">
+                        <span class="btn-icon">🎲</span>
+                        <div class="btn-text">
+                            <strong>ROLL (LUCK)</strong>
+                            <span>50% chance for free info.</span>
+                        </div>
+                    </button>
+                </div>
+
+                <div id="coax-sub-menu" class="hidden encounter-choices">
+                    <button class="encounter-btn" onclick="Encounter.executeCoax('BUY')">Pay 5 Coins (Safe)</button>
+                    <button class="encounter-btn danger-btn" onclick="Encounter.executeCoax('LIE')">Lie (Free but causes Grudge)</button>
+                    <button class="encounter-btn cancel-btn" onclick="Encounter.cancelCoax()">Back</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/player.js"></script>
+    <script src="js/room.js"></script>
+    <script src="js/robot.js"></script>
+    <script src="js/encounter.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>
