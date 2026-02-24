@@ -52,9 +52,7 @@ const Game = {
         this.player.repairLimbs(); // Heal at checkpoint
         const overlay = document.getElementById('overlay-screen');
         overlay.classList.remove('hidden');
-        document.getElementById('overlay-title').innerText = "WORKSHOP";
-        document.getElementById('overlay-message').innerText = `Preparing for Room ${this.roomIndex + 1}`;
-        document.getElementById('workshop-menu').classList.remove('hidden');
+        document.getElementById('workshop-ui').classList.remove('hidden');
         document.getElementById('encounter-screen').classList.add('hidden');
         this.updateHUD();
     },
@@ -66,6 +64,17 @@ const Game = {
 
     setChassis(type) {
         this.player.chassis = type;
+
+        // Update UI selection highlight
+        document.querySelectorAll('.option-row').forEach(row => row.classList.remove('selected'));
+        if (type === 'Heavy/Armor') {
+            document.getElementById('opt-heavy').classList.add('selected');
+        } else if (type === 'Speed/Bladed') {
+            document.getElementById('opt-speed').classList.add('selected');
+        } else if (type === 'Hacking/Digital') {
+            document.getElementById('opt-hack').classList.add('selected');
+        }
+
         this.updateHUD();
     },
 
