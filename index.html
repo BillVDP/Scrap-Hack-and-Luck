@@ -81,18 +81,88 @@
                     <!-- Left side: Holographic Robot Render -->
                     <div class="workshop-holo-container">
                         <div class="holo-label">CHASSIS</div>
-                        <div class="holo-robot">
-                            <!-- CSS Drawn Wireframe Robot -->
-                            <div class="holo-head"></div>
-                            <div class="holo-torso">
-                                <div class="holo-core"></div>
-                            </div>
-                            <div class="holo-arm left-arm">
-                                <div class="holo-claw"></div>
-                            </div>
-                            <div class="holo-arm right-arm"></div>
-                            <div class="holo-leg left-leg"></div>
-                            <div class="holo-leg right-leg"></div>
+                        <div class="holo-robot-container">
+                            <svg class="holo-svg-robot" xmlns="http://www.w3.org/2000/svg" viewBox="-30 -20 250 230"
+                                width="100%" height="100%">
+                                <defs>
+                                    <linearGradient id="metal" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#9ca3af;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#4b5563;stop-opacity:1" />
+                                    </linearGradient>
+                                    <linearGradient id="darkMetal" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#4b5563;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#1f2937;stop-opacity:1" />
+                                    </linearGradient>
+                                    <linearGradient id="rust" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#b45309;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#78350f;stop-opacity:1" />
+                                    </linearGradient>
+                                    <linearGradient id="eyeGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" style="stop-color:#7f1d1d;stop-opacity:1" />
+                                        <stop offset="50%" style="stop-color:#ef4444;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#7f1d1d;stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+
+                                <ellipse cx="100" cy="185" rx="70" ry="8" fill="rgba(0,0,0,0.3)" />
+
+                                <rect x="135" y="90" width="40" height="15" rx="5" fill="url(#darkMetal)"
+                                    transform="rotate(25 135 90)" />
+                                <circle cx="170" cy="110" r="10" fill="url(#metal)" />
+                                <path class="robot-feature-fill" d="M 170 110 L 160 140 L 180 140 Z" fill="url(#metal)"
+                                    stroke="#1f2937" stroke-width="1" />
+
+                                <rect x="35" y="145" width="55" height="35" rx="10" fill="#111827" />
+                                <rect x="40" y="150" width="45" height="25" rx="5" fill="url(#darkMetal)" />
+                                <circle cx="50" cy="162.5" r="8" fill="url(#metal)" />
+                                <circle cx="75" cy="162.5" r="8" fill="url(#metal)" />
+
+                                <rect x="110" y="145" width="55" height="35" rx="10" fill="#111827" />
+                                <rect x="115" y="150" width="45" height="25" rx="5" fill="url(#darkMetal)" />
+                                <circle cx="125" cy="162.5" r="8" fill="url(#metal)" />
+                                <circle cx="150" cy="162.5" r="8" fill="url(#metal)" />
+
+                                <rect class="robot-feature-fill" x="75" y="125" width="50" height="25" rx="3"
+                                    fill="url(#darkMetal)" />
+                                <circle cx="85" cy="135" r="5" fill="url(#rust)" opacity="0.8" />
+
+                                <rect class="robot-feature-stroke" x="55" y="60" width="90" height="75" rx="8"
+                                    fill="url(#metal)" stroke="#1f2937" stroke-width="2" />
+                                <rect x="65" y="70" width="70" height="25" fill="url(#darkMetal)" />
+                                <rect x="65" y="100" width="30" height="25" fill="url(#darkMetal)" />
+                                <rect x="100" y="100" width="35" height="25" fill="url(#darkMetal)" />
+                                <path d="M 60 65 Q 75 70 70 85 Q 55 80 60 65" fill="url(#rust)" opacity="0.9" />
+                                <circle cx="130" cy="120" r="8" fill="url(#rust)" opacity="0.7" />
+
+                                <rect x="85" y="45" width="30" height="20" fill="url(#darkMetal)" />
+
+                                <rect class="robot-feature-stroke" x="65" y="10" width="70" height="45" rx="5"
+                                    fill="url(#metal)" stroke="#1f2937" stroke-width="2" />
+                                <path d="M 120 15 Q 135 25 125 40 Q 115 35 120 15" fill="url(#rust)" opacity="0.8" />
+
+                                <rect x="75" y="-10" width="4" height="25" fill="#4b5563" />
+                                <circle cx="77" cy="-12" r="5" fill="#ef4444" />
+
+                                <rect x="75" y="22" width="50" height="18" rx="2" fill="#111827" />
+                                <rect class="robot-glow" x="80" y="25" width="40" height="12" rx="2"
+                                    fill="url(#eyeGlow)" />
+                                <rect x="85" y="27" width="10" height="3" rx="1" fill="#fca5a5" opacity="0.8" />
+
+                                <rect class="robot-feature-stroke" x="40" y="65" width="25" height="30" rx="5"
+                                    fill="url(#metal)" stroke="#1f2937" stroke-width="2" />
+                                <rect x="25" y="80" width="25" height="15" fill="url(#darkMetal)"
+                                    transform="rotate(-20 25 80)" />
+                                <rect class="robot-feature-stroke" x="5" y="90" width="30" height="20" rx="3"
+                                    fill="url(#metal)" stroke="#1f2937" stroke-width="1" />
+                                <circle cx="10" cy="100" r="12" fill="url(#darkMetal)" />
+                                <path class="robot-feature-fill robot-feature-stroke"
+                                    d="M 10 95 C 10 75 -15 75 -15 95 L -5 95 C -5 85 5 85 5 95 Z" fill="url(#metal)"
+                                    stroke="#1f2937" stroke-width="1" />
+                                <path class="robot-feature-fill robot-feature-stroke"
+                                    d="M 10 105 C 10 125 -15 125 -15 105 L -5 105 C -5 115 5 115 5 105 Z"
+                                    fill="url(#metal)" stroke="#1f2937" stroke-width="1" />
+
+                            </svg>
                         </div>
                     </div>
 
